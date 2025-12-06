@@ -13,7 +13,7 @@ Are there other alternatives well implemented and maintained?? Most likely, more
 ## Installation
 - Clone the repository
 ```bash
-git clone
+git clone git@github.com:selanyat/batnot.git
 cd batnot
 ```
 - Create a virtual environment

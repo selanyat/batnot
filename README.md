@@ -1,5 +1,4 @@
 # Batnot
----
 
 Batnot is a simple script to send a notification when battery is below 30 percent.
 It was built with hyprland in mind.
@@ -34,12 +33,13 @@ chmod +x batnot.py
 - Open your hyprland config file
 - Execute once on startup and run in background
 ```jsonc
-exec_once = path/to/batnot.py &
+exec_once = bash -c "sleep 300 && /path/to/intepretor path/to/batnot.py"
+# Sleep is completely optional
 ```
 >[!NOTE]
->A notification utility such as `mako` or `dunst` must be installed on your PC for this to work.
->See [mako on arch wiki](https://man.archlinux.org/man/mako.5.en)
->See [dunst website](https://dunst-project.org)
+>A notification utility such as `mako` or `dunst` must be installed on your PC for this to work.<br>
+>See [mako on arch wiki](https://man.archlinux.org/man/mako.5.en)<br>
+>See [dunst website](https://dunst-project.org)<br>
 >I can't assure compatibility with other notification daemons
 
 

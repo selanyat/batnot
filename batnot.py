@@ -14,6 +14,8 @@ def expand_secs(secs_left):
 
   return (hrs, mins, secs_left)
 
+# Initialize notification
+notify2.init("batnot")
 
 
 def notify(percent, secs_left):
@@ -21,7 +23,7 @@ def notify(percent, secs_left):
   hrs, mins, secs = expand_secs(secs_left)
 
   # Display notification on screen
-  notify2.init("batnot")
+  global n
   n = notify2.Notification(f"Low Battery",
                            f"You have {percent}% battery left \nEstimated time left {hrs}hrs {mins}mins {secs}secs"
                            )
@@ -29,6 +31,20 @@ def notify(percent, secs_left):
 
   system("mpg123 lowbat.mp3")
 
+def update_notification(notification, percent, secs_left):
+  # Update notification
+  """The notify function must always be called at least once before this function"""
+
+  hrs, mins, secs = expand_secs(secs_left)
+
+  #Update notification
+  notification.update("Low battery",
+                      f"You have {percent}% battery left \nEstimated time left {hrs}hrs {mins}mins {secs}secs"
+                      )
+  notification.show()
+
+
+  system("mpg123 lowbat.mp3")
 
 
 def sleeptime(percent, secs_left):
@@ -46,6 +62,19 @@ def main():
 
     if percent <= 30 and power_plugged == False:
       notify(percent, secsleft)
+
+      while True:
+        sleep_time = sleeptime(percent, secsleft)
+        sleep(sleep_time)
+
+        percent, secsleft, power_plugged = sensors_battery()
+        percent = int(percent)
+
+        if percent <= 30 and power_plugged == False:
+          update_notification(n, percent, secsleft)
+
+        else:
+          break
 
     sleep_time = sleeptime(percent, secsleft)
     sleep(sleep_time)

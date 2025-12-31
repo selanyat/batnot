@@ -74,6 +74,7 @@ def main():
           update_notification(n, percent, secsleft)
 
         else:
+          n.close()
           break
 
     sleep_time = sleeptime(percent, secsleft)

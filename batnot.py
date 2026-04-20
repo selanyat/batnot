@@ -1,9 +1,9 @@
 #!./batnot/bin/python
 
+import subprocess
 from time import sleep
 from psutil import sensors_battery
 import notify2
-from os import system
 
 def expand_secs(secs_left):
   # Convert seconds into hours minutes and seconds
@@ -29,7 +29,7 @@ def notify(percent, secs_left):
                            )
   n.show()
 
-  system("mpg123 lowbat.mp3")
+  subprocess.run(["mpg123", "lowbat.mp3"])
 
 def update_notification(notification, percent, secs_left):
   # Update notification
@@ -44,7 +44,7 @@ def update_notification(notification, percent, secs_left):
   notification.show()
 
 
-  system("mpg123 lowbat.mp3")
+  subprocess.run(["mpg123", "lowbat.mp3"])
 
 
 def sleeptime(percent, secs_left):
